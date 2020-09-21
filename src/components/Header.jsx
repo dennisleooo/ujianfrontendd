@@ -42,6 +42,12 @@ function ButtonAppBar({username,isLogin,role,cart}) {
   const classes = useStyles();
   const [anchorEl,setopen]=useState(null)
 
+  const onLogoutClick=()=>{
+    localStorage.clear()
+    window.location.reload()
+    window.location.assign(`http://localhost:3000/`)
+  }
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.warna} position='static'>
@@ -49,7 +55,7 @@ function ButtonAppBar({username,isLogin,role,cart}) {
             <NavLink to='/'  style={{textDecoration:'none',color:'white'}}>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <FlightTakeoff/>
-                </IconButton>
+        </IconButton>
             </NavLink> 
           <Typography variant="h6" className={classes.title}>
             JoinTrip
@@ -85,9 +91,11 @@ function ButtonAppBar({username,isLogin,role,cart}) {
                 onClose={()=>setopen(null)}
                 // onClose={handleClose}
               >
-                <MenuItem >Profile</MenuItem>
-                <MenuItem >My account</MenuItem>
-                <MenuItem >Logout</MenuItem>
+                <Link to='/profile'>
+                <MenuItem style={{textdecoration:'none',color:'black'}}>History</MenuItem>
+                </Link>
+                <MenuItem >Setting</MenuItem>
+                <MenuItem onClick={onLogoutClick}>Logout</MenuItem>
               </Menu>
             </>
             :

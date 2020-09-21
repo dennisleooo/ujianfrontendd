@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "username": "dino",
+      "username": "dennis",
       "password": "abcd",
       "role": "user"
     },
@@ -11,25 +11,31 @@
       "username": "admin",
       "password": "root",
       "role": "admin"
+    },
+    {
+      "username": "dede",
+      "password": "1234",
+      "role": "user",
+      "id": 3
     }
   ],
   "products": [
     {
-      "namatrip": "go to lombok",
-      "gambar": "https://media.nomadicmatt.com/baliguide.jpg",
-      "tanggalmulai": 1599782400000,
-      "tanggalberakhir": 1600905600000,
-      "harga": "200000",
-      "deskripsi": "jl. jlan ke lombok aja deh",
+      "namatrip": "ke pulau 1",
+      "gambar": "https://assets-a1.kompasiana.com/items/album/2019/04/14/liburan-3-5cb2c933a8bc151cd14d0962.jpg",
+      "tanggalmulai": 1599868800000,
+      "tanggalberakhir": 1600041600000,
+      "harga": "300000",
+      "deskripsi": "ayoo ke pulau seribu",
       "id": 1
     },
     {
-      "namatrip": "go to bali aja deh",
-      "gambar": "https://adajejak.com/wp-content/uploads/2019/11/10153833-0istock-653953140_cover_1920x1200.jpg",
-      "tanggalmulai": 1600214400000,
-      "tanggalberakhir": 1600646400000,
-      "harga": "300002",
-      "deskripsi": "ggwp aja dah hahahaha hihihihi",
+      "namatrip": "ke pulau 2",
+      "gambar": "https://assets-a1.kompasiana.com/items/album/2019/04/14/liburan-3-5cb2c933a8bc151cd14d0962.jpg",
+      "tanggalmulai": 1599868800000,
+      "tanggalberakhir": 1600041600000,
+      "harga": "300000",
+      "deskripsi": "ayoo ke pulau seribu",
       "id": 2
     },
     {
@@ -42,12 +48,12 @@
       "id": 3
     },
     {
-      "namatrip": "liburan ke pulau",
-      "gambar": "https://assets-a1.kompasiana.com/items/album/2019/12/27/images-5e050cec097f36747b353fb2.jpeg",
+      "namatrip": "ke pulau 4",
+      "gambar": "https://assets-a1.kompasiana.com/items/album/2019/04/14/liburan-3-5cb2c933a8bc151cd14d0962.jpg",
       "tanggalmulai": 1599868800000,
-      "tanggalberakhir": 1600387200000,
-      "harga": "500000",
-      "deskripsi": "pergi liburan kesini emang asyik bangett",
+      "tanggalberakhir": 1600041600000,
+      "harga": "300000",
+      "deskripsi": "ayoo ke pulau seribu",
       "id": 4
     },
     {
@@ -58,9 +64,24 @@
       "harga": "999000",
       "deskripsi": "ayoo ke pulau seribu",
       "id": 5
+    },
+    {
+      "namatrip": "ke pantai yukk",
+      "gambar": "https://image.cermati.com/q_70/iwa9toftcplkt1bhoy8z",
+      "tanggalmulai": 1599868800000,
+      "tanggalberakhir": 1600992000000,
+      "harga": "250000",
+      "deskripsi": "ini keren loo",
+      "id": 7
     }
   ],
   "carts": [
+    {
+      "userId": 1,
+      "productId": 1,
+      "qty": 3,
+      "id": 1
+    }
   ],
   "transactions": [
     {
@@ -78,23 +99,17 @@
       "metode": "upload",
       "buktipembayaran": "https://www.pakaiatm.com/wp-content/uploads/2020/03/Contoh-Bukti-Transfer-BRI-Asli-atau-Palsu.jpg",
       "id": 3
+    },
+    {
+      "status": "WaitingAdmin",
+      "userId": 1,
+      "tanggalPembayaran": 1600659750795,
+      "metode": "upload",
+      "buktipembayaran": "https://ecs7.tokopedia.net/img/cache/700/product-1/2020/1/21/5677080/5677080_cf2ef623-8e05-4c90-80ec-0a6edb107d3e_648_648.jpg",
+      "id": 4
     }
   ],
   "transactionsdetails": [
-    {
-      "transactionId": 2,
-      "productId": 2,
-      "price": 300002,
-      "qty": 2,
-      "id": 3
-    },
-    {
-      "transactionId": 2,
-      "productId": 2,
-      "price": 300002,
-      "qty": 2,
-      "id": 4
-    },
     {
       "transactionId": 2,
       "productId": 3,
@@ -104,17 +119,31 @@
     },
     {
       "transactionId": 3,
-      "productId": 1,
-      "price": 200000,
-      "qty": 1,
-      "id": 6
-    },
-    {
-      "transactionId": 3,
       "productId": 5,
       "price": 999000,
       "qty": 1,
       "id": 7
+    },
+    {
+      "transactionId": 4,
+      "productId": 1,
+      "price": 300000,
+      "qty": 5,
+      "id": 8
+    },
+    {
+      "transactionId": 4,
+      "productId": 5,
+      "price": 999000,
+      "qty": 8,
+      "id": 9
+    },
+    {
+      "transactionId": 4,
+      "productId": 2,
+      "price": 300000,
+      "qty": 4,
+      "id": 10
     }
   ]
 }

@@ -46,7 +46,7 @@ export const LoginThunk=(username,password)=>{
                     dispatch({type:'Error',payload:'servernya error bro'})
                 })
             }else{
-                dispatch({type:'Error',payload:'kayaknya nb dari redux'})
+                dispatch({type:'Error',payload:'masukkin datanya bro'})
             }
         }).catch((err)=>{
             dispatch({type:'Error',payload:'servernya error bro'})

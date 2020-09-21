@@ -31,22 +31,53 @@ class DetailProd extends Component {
             alert('jangan beli bro inget admin')
         }else if(this.props.role==='user'){
             if(this.state.qty.current.value){
-                Axios.post(`${API_URL}/carts`,{
-                    userId:this.props.id,
-                    productId:this.state.products.id,
-                    qty: parseInt(this.state.qty.current.value)
-                }).then(()=>{
-                    Axios.get(`${API_URL}/carts`,{
-                        params:{
+                Axios.get(`${API_URL}/carts`,{
+                    params: {
+                        userId:this.props.id,
+                        productId:this.state.products.id
+                    }
+                }).then((res)=>{
+                    if(res.data.length){
+                        Axios.get(`${API_URL}/carts`)
+                        .then((res1)=>{
+                            var indexproduk=res1.data.findIndex((val)=>{
+                                return val.userId == this.props.id && val.productId == this.state.products.id
+                            })
+                            Axios.patch(`${API_URL}/carts/${indexproduk+1}`,{
+                                qty:res1.data[indexproduk].qty+parseInt(this.state.qty.current.value)
+                            }).then(()=>{
+                                alert('sukses diupdate')
+
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+
+                        }).catch((err)=>{
+                            console.log(err)
+                        })
+                    }else{
+                        //kalo blom pernah tambah product
+                        Axios.post(`${API_URL}/carts`,{
                             userId:this.props.id,
-                            _expand:'product'
-                        }
-                    }).then((res)=>{
-                        this.props.AddcartAction(res.data)
-                        alert('berhasil masuk cart')
-                    }).catch((err)=>{
-                        console.log(err)
-                    })
+                            productId:this.state.products.id,
+                            qty: parseInt(this.state.qty.current.value)
+                        }).then(()=>{
+                            Axios.get(`${API_URL}/carts`,{
+                                params:{
+                                    userId:this.props.id,
+                                    _expand:'product'
+                                }
+                            }).then((res3)=>{
+                                this.props.AddcartAction(res3.data)
+                                alert('berhasil masuk cart')
+                            }).catch((err)=>{
+                                console.log(err)
+                            })
+                        })
+                    }
+
+                }).catch((err)=>{
+                    console.log(err)
                 })
             }else{
                 toast('salah broo harusnya qty disii', {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Homescreen from '../../assets/Homescreen.webp'
+import Homescreen from '../../assets/homess.webp'
 import TravelBook from '../../assets/travelbook.svg'
 import Travelers from '../../assets/travelers.svg'
 import Header from '../../components/Header'
@@ -15,9 +15,9 @@ class Home extends Component {
                 <div style={{width:'100%', height:'90vh'}}>
                     <img src={Homescreen} style={{objectFit:'cover'}} width='100%' height='100%'/>
                 </div>
-                <div className='text-white d-flex align-items-center px-5' style={{height:'8vh',backgroundColor:'#afafaf',justifyContent:"space-between"}}>
+                <div className='text-white d-flex align-items-center px-5' style={{height:'8vh',backgroundColor:'#fe6b8b',justifyContent:"space-between"}}>
                     <div>
-                        promo    
+                       <b>Ada Promo</b>   
                     </div> 
                     <div>
                         <Link to='/products'>
@@ -44,7 +44,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className='text-white d-flex justify-content-center align-items-center' style={{height:'20vh',backgroundColor:'#fe6b8b'}}>
-                    <h1>Mau Gabung?</h1>
+                    <h1>Gabung Yuk!</h1>
                 </div>
             </div>
         );

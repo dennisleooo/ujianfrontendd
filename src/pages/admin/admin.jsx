@@ -15,8 +15,13 @@ import {priceFormatter, API_URL} from '../../helpers/idrformat'
 import ButtonUi from './../../components/button'
 import axios from 'axios'
 import {connect} from 'react-redux'
-// import from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import Notfound from './../notfound'
+
+const MySwal = withReactContent(Swal)
+
+// import from 'react-router-dom'
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -63,6 +68,31 @@ const useStyles = makeStyles({
     fetch()
   },[])
 
+  const Ondelclick=(index, id)=>{
+    MySwal.fire({
+      title: `Are you sure want to delete ? ${product[index].namatrip}`,
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        axios.delete(`${API_URL}/products/${id}`)
+        .then((res)=>{
+          MySwal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          window.location.reload()
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }
+    })
+  }
 
   const onhargachange=(e)=>{
     if(e.target.value===''){
@@ -218,7 +248,7 @@ const useStyles = makeStyles({
             <TableCell>{priceFormatter(val.harga)}</TableCell>
             <TableCell>{readMore(val.deskripsi)}</TableCell>
             <TableCell>
-              <span style={{fontSize:30}} className='text-danger mr-3'><MdDeleteForever/></span>
+              <span style={{fontSize:30}} onClick={()=>Ondelclick(index, val.id)} className='text-danger mr-3'><MdDeleteForever/></span>
               <span style={{fontSize:30}} onClick={()=>Oneditclick(index)} className='text-primary ml-3'><BiEdit/></span>  
             </TableCell>
         </TableRow>

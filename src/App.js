@@ -15,6 +15,8 @@ import Cart from './pages/cart'
 import DetailProd from './pages/detailprod'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css' 
+import Register from './pages/register/register'
+import History from './pages/history/history'
 // umum : register
 // user : history,
 // admin :confirm admin,
@@ -68,7 +70,9 @@ function App(props) {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/login' component={Login}/>
+        <Route exact path='/register' component={Register}/>
         <Route exact path='/products' component={ListProd}/>
+        <Route exact path='/profile' component={History}/>
         <Route path='/products/:id' component={DetailProd}/>
         <Route exact path='/cart' component={Cart}/>
         {renderProtectedroutesadmin()}

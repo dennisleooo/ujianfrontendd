@@ -15,6 +15,13 @@ import TableFooter from '@material-ui/core/TableFooter';
 import ButtonUi from './../../components/button'
 import {Modal,ModalHeader,ModalBody,ModalFooter} from 'reactstrap'
 import {AddcartAction} from './../../redux/Actions'
+import {MdDeleteForever} from 'react-icons/md'
+import {BiEdit} from 'react-icons/bi'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+
 class Cart extends Component {
     state = {
         cart:[],
@@ -23,6 +30,8 @@ class Cart extends Component {
         bukti:createRef(),
         cc:createRef()
     }
+
+    
     componentDidMount(){
         // Axios.get(`${API_URL}/carts?userId=${this.props.id}&_expand=product`)
         console.log(this.props.id)
@@ -40,6 +49,43 @@ class Cart extends Component {
         })
     }
 
+    Ondelclick=(index, id)=>{
+        MySwal.fire({
+          title: `Are you sure want to delete ? ${this.state.cart[index].product.namatrip}`,
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            Axios.delete(`${API_URL}/carts/${id}`)
+            .then((res)=>{
+                Axios.get(`${API_URL}/carts`,{
+                    params:{
+                        userId:this.props.id,
+                        _expand:'product'
+                    }
+                })
+                .then((res)=>{
+                    console.log(res.data)
+                    MySwal.fire(
+                      'Deleted!',
+                      'Your file has been deleted.',
+                      'success'
+                    )
+                    this.setState({cart:res.data})
+                }).catch((err)=>{
+                    console.log(err)
+                })
+              window.location.reload()
+            }).catch((err)=>{
+              console.log(err)
+            })
+          }
+        })
+      }
 
     renderTotalHarga=()=>{
         var total=this.state.cart.reduce((total,num)=>{
@@ -62,6 +108,10 @@ class Cart extends Component {
                     <TableCell>{val.qty}</TableCell>
                     <TableCell>{priceFormatter(val.product.harga)}</TableCell>
                     <TableCell>{priceFormatter(val.product.harga*val.qty)}</TableCell>
+                    <TableCell>
+                        <span style={{fontSize:30}} onClick={()=>this.Ondelclick(index, val.id)} className='text-danger mr-3'><MdDeleteForever/></span>
+                        <span style={{fontSize:30}}  className='text-primary ml-3'><BiEdit/></span>  
+                    </TableCell>
                 </TableRow>
             )
         })
@@ -229,8 +279,8 @@ class Cart extends Component {
                         <ModalBody>
                             <select onChange={(e)=>this.setState({pilihan:e.target.value})} className='form-control' defaultValue={0} >
                                 <option value="0" hidden>Select payment</option>
-                                <option value="1">input bukti transfer</option>
-                                <option value="2">Credit card</option>
+                                <option value="1">Via transfer</option>
+                                <option value="2"> Via Credit card</option>
                             </select>
                             {
                                 this.state.pilihan==2?
@@ -264,6 +314,7 @@ class Cart extends Component {
                                             <TableCell>Jumlah</TableCell>
                                             <TableCell>Harga</TableCell>
                                             <TableCell>subtotal Harga</TableCell>
+                                            <TableCell >action</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
